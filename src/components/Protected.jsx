@@ -22,7 +22,6 @@ function Protected() {
                         localStorage.setItem('access_token', access_token);
                         localStorage.setItem('refresh_token', refresh_token);
 
-                        // Повторная попытка получить защищённые данные
                         const retryResponse = await getProtectedData(access_token);
                         setData(retryResponse.data);
                     } catch (refreshErr) {

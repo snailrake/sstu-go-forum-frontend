@@ -22,7 +22,7 @@ function App() {
             </nav>
             <div className="content">
                 <Routes>
-                    <Route path="/" element={<h2>Добро пожаловать!</h2>} />
+                    <Route path="/" element={<h2>Главная страница</h2>} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login setTokens={setTokens} />} />
                     <Route path="/protected" element={<Protected />} />
