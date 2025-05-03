@@ -43,6 +43,9 @@ function Login({ setTokens }) {
                 {error && <p className="error">{error}</p>}
                 <button type="submit">Войти</button>
             </form>
+            <p>
+                <span onClick={() => navigate('/register')} className="link">Зарегистрироваться</span>
+            </p>
         </div>
     );
 }

@@ -39,6 +39,9 @@ function Register() {
                 {error && <p className="error">{error}</p>}
                 <button type="submit">Зарегистрироваться</button>
             </form>
+            <p>
+                <span onClick={() => navigate('/login')} className="link">Войти</span>
+            </p>
         </div>
     );
 }

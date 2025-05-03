@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState } from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Register from './components/Register';
@@ -22,17 +21,21 @@ function App() {
         navigate('/login');
     };
 
+    const handleLogin = () => {
+        navigate('/login'); // Редирект на страницу логина
+    };
+
     return (
         <div className="app-container">
             <nav className="nav">
                 <ul>
                     <li><Link to="/">Главная</Link></li>
-                    <li><Link to="/register">Регистрация</Link></li>
-                    <li><Link to="/login">Вход</Link></li>
                     <li><Link to="/chat">Чат</Link></li>
                 </ul>
-                {tokens.access_token && (
-                    <button onClick={handleLogout} className="logout-button">Выйти</button> // Кнопка Logout
+                {!tokens.access_token ? (
+                    <button onClick={handleLogin} className="login-button">Войти</button> // Показываем кнопку "Войти"
+                ) : (
+                    <button onClick={handleLogout} className="logout-button">Выйти</button> // Показываем кнопку "Выйти"
                 )}
             </nav>
             <div className="content">
