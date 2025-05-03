@@ -85,3 +85,96 @@ body {
     color: red;
     text-align: center;
 }
+
+/* index.css */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.chat-input {
+    display: flex;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.chat-input button {
+    padding: 10px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #005fa3;
+}
+/* Добавьте в index.css */
+.logout-button {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: #e60000;
+}
+
+/* Добавьте в index.css */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    padding: 10px 20px;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav ul li {
+    font-size: 16px;
+}
+
+.logout-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: #0056b3;
+}
+
+/* Размещение кнопки справа */
+.nav .logout-button {
+    margin-left: auto;
+}
+

@@ -79,6 +79,20 @@ api.interceptors.request.use(async config => {
     return config;
 }, error => Promise.reject(error));
 
+export const getAllMessages = async (token) => {
+    try {
+        const response = await axios.get(`${baseURL}/chat/messages`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Ошибка при загрузке сообщений:', error);
+        throw error;
+    }
+};
+
 // Экспортируем функции для UI
 export const registerUser = (username, password) =>
     api.post('/register', { username, password });
