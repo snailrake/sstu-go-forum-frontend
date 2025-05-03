@@ -9,15 +9,14 @@ function App() {
         access_token: localStorage.getItem('access_token') || '',
         refresh_token: localStorage.getItem('refresh_token') || '',
     });
+    const [isPanelOpen, setIsPanelOpen] = useState(false);  // Состояние для открытия чата
 
-    const navigate = useNavigate(); // Добавим useNavigate для редиректа
+    const navigate = useNavigate(); // Для редиректа
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         setTokens({ access_token: '', refresh_token: '' });
-
-        // Перенаправляем пользователя на страницу входа после логаута
         navigate('/login');
     };
 
@@ -26,24 +25,33 @@ function App() {
     };
 
     return (
-        <div className="app-container">
+        <div className={isPanelOpen ? 'app-container panel-open' : 'app-container'}>
             <nav className="nav">
                 <ul>
                     <li><Link to="/">Главная</Link></li>
-                    <li><Link to="/chat">Чат</Link></li>
                 </ul>
+                {/* Изменяем классы кнопок для сдвига при открытии чата */}
                 {!tokens.access_token ? (
-                    <button onClick={handleLogin} className="login-button">Войти</button> // Показываем кнопку "Войти"
+                    <button
+                        onClick={handleLogin}
+                        className={`login-button ${isPanelOpen ? 'shifted' : ''}`}
+                    >
+                        Войти
+                    </button>
                 ) : (
-                    <button onClick={handleLogout} className="logout-button">Выйти</button> // Показываем кнопку "Выйти"
+                    <button
+                        onClick={handleLogout}
+                        className={`logout-button ${isPanelOpen ? 'shifted' : ''}`}
+                    >
+                        Выйти
+                    </button>
                 )}
             </nav>
             <div className="content">
                 <Routes>
-                    <Route path="/" element={<h2>Главная страница</h2>} />
+                    <Route path="/" element={<Chat setIsPanelOpen={setIsPanelOpen} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login setTokens={setTokens} />} />
-                    <Route path="/chat" element={<Chat />} />
                 </Routes>
             </div>
         </div>

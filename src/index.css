@@ -1,3 +1,60 @@
+
+/* Стили для навигационной панели */
+.nav {
+    background: #007acc;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end; /* Расположение кнопок справа */
+    align-items: center;
+    position: relative;  /* Это нужно, чтобы кнопки оставались внутри панели */
+}
+
+/* Стили для кнопок "Войти" и "Выйти" */
+.nav .login-button,
+.nav .logout-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: transform 0.3s ease, margin-left 0.3s ease; /* Плавный сдвиг */
+}
+
+/* Начальная позиция кнопок */
+.nav .login-button {
+    margin-left: 0;
+}
+
+.nav .logout-button {
+    margin-left: 10px;
+}
+
+/* Когда панель чата открыта, сдвигаем кнопки */
+.nav .login-button.shifted,
+.nav .logout-button.shifted {
+    transform: translateX(-300px); /* Сдвигаем кнопки влево */
+}
+
+/* Ховеры для кнопок */
+.nav .login-button:hover,
+.nav .logout-button:hover {
+    background-color: #0056b3;
+}
+
+.nav .login-button:active,
+.nav .logout-button:active {
+    background-color: #003f7f;
+}
+
+
+
+
+
+
+
+
 /* Основные стили */
 body {
     font-family: Arial, sans-serif;
@@ -18,20 +75,42 @@ body {
 .nav {
     background: #007acc;
     padding: 10px 20px;
+    display: flex; /* Используем flexbox для выравнивания элементов в навигации */
+    justify-content: space-between; /* Разделяем элементы с максимальным расстоянием */
+    align-items: center; /* Выравнивание по вертикали */
 }
+
 .nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
+
 .nav ul li {
     margin-right: 1rem;
 }
+
 .nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+}
+
+/* Кнопка "Войти" в навигации */
+.nav .login-button {
+    margin-left: auto; /* Выравнивание кнопки "Войти" справа */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.nav .login-button:hover {
+    background-color: #0056b3;
 }
 
 /* Контент по центру */
@@ -51,22 +130,32 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     width: 100%;
     max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Убедитесь, что padding и border не влияют на размеры */
 }
+
 .form-container h2 {
     text-align: center;
     margin-bottom: 20px;
 }
+
 .form-container form {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
+
 .form-container input {
     padding: 10px;
     margin: 10px 0;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box; /* Убедитесь, что padding не добавляет лишний размер */
 }
+
 .form-container button {
     padding: 10px;
     font-size: 1rem;
@@ -75,7 +164,10 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;  /* Кнопка растягивается на всю ширину */
+    box-sizing: border-box; /* Убедитесь, что padding не добавляет лишний размер */
 }
+
 .form-container button:hover {
     background: #005fa3;
 }
@@ -86,14 +178,14 @@ body {
     text-align: center;
 }
 
-/* index.css */
+/* Стили для чата */
 .chat-container {
     display: flex;
     flex-direction: column;
     height: 400px;
     border: 1px solid #ccc;
     padding: 10px;
-    min-width: 450px; /* Устанавливаем минимальную ширину чата */
+    min-width: 450px;
 }
 
 .messages {
@@ -125,7 +217,8 @@ body {
 .chat-input button:hover {
     background-color: #005fa3;
 }
-/* Добавьте в index.css */
+
+/* Стиль для кнопки выхода */
 .logout-button {
     background-color: #ff4d4d;
     color: white;
@@ -141,23 +234,9 @@ body {
     background-color: #e60000;
 }
 
-/* Добавьте в index.css */
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #007bff;
-    padding: 10px 20px;
-}
-
-.nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav ul li {
-    font-size: 16px;
+/* Стиль для кнопки Выйти */
+.nav .logout-button {
+    margin-left: auto;
 }
 
 .logout-button {
@@ -178,7 +257,8 @@ body {
 .nav .logout-button {
     margin-left: auto;
 }
-/* Добавляем стили для кнопок Войти и Зарегистрироваться */
+
+/* Различные стили для кнопок Войти и Зарегистрироваться */
 .login-button, .logout-button {
     padding: 10px 20px;
     background-color: #007bff;
@@ -196,11 +276,43 @@ body {
 .link {
     color: #007bff;
     cursor: pointer;
-    text-decoration: underline; /* Подчеркивание */
+    text-decoration: underline;
 }
 
 .link:hover {
-    text-decoration: none; /* Убираем подчеркивание при наведении */
+    text-decoration: none;
 }
 
+/* Общие стили для кнопок и ввода */
+button {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+}
 
+button:hover {
+    background-color: #005fa3;
+}
+
+input {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    width: 100%;
+}
+
+/* Изменения только для кнопки "Войти" в форме */
+.form-container button {
+    padding: 10px;
+    font-size: 1rem;
+    background: #007acc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;  /* Растягиваем кнопку на всю ширину */
+    box-sizing: border-box; /* Убедитесь, что padding не добавляет лишний размер */
+}

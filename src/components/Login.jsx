@@ -41,7 +41,9 @@ function Login({ setTokens }) {
                     required
                 />
                 {error && <p className="error">{error}</p>}
-                <button type="submit">Войти</button>
+                <button type="submit" className="full-width-button">
+                    Войти
+                </button>
             </form>
             <p>
                 <span onClick={() => navigate('/register')} className="link">Зарегистрироваться</span>
