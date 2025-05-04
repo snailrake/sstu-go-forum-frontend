@@ -1,4 +1,114 @@
-/* Modal Container */
+
+/* Styling for the post list container */
+.post-list {
+    margin-top: 20px;
+}
+
+/* Individual post item styling */
+.post-item {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for post item */
+.post-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Post title styling */
+.post-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.post-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    text-decoration: underline;
+}
+
+/* Post content styling with truncation */
+.post-content {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit the content to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Post metadata (author, date) styling */
+.post-meta {
+    font-size: 0.9rem;
+    color: #888;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-author {
+    font-weight: bold;
+}
+
+.post-date {
+    font-style: italic;
+}
+
+/* Form styling for creating new posts */
+.post-form {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form input and textarea styling */
+.post-form input,
+.post-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.post-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.post-form button:hover {
+    background-color: #005fa3;
+}
+
+.post-form button:active {
+    background-color: #003f7f;
+}
+
+
+
+
 .modal-container {
     position: fixed;
     top: 50%;
@@ -210,7 +320,6 @@
     flex-grow: 1;
     padding: 20px;
     background-color: #fff;
-    overflow-y: auto;
 }
 
 /* Sidebar styling */
@@ -600,3 +709,289 @@ input {
     width: 100%;  /* Растягиваем кнопку на всю ширину */
     box-sizing: border-box; /* Убедитесь, что padding не добавляет лишний размер */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Hover effect for post item */
+.post-item:hover {
+    transform: translateY(-5px);
+}
+
+
+/* Контейнер для контента */
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;  /* Выравнивание содержимого по верхнему краю */
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+/* Центрирование формы для Login и Register */
+/* Центрирование формы в .content */
+.content.login-register {
+    display: flex;
+    justify-content: center;  /* Центрируем по горизонтали */
+    align-items: center;      /* Центрируем по вертикали */
+    min-height: 100vh;        /* Занимает всю высоту экрана */
+    overflow-y: hidden;
+}
+
+/* Центрирование формы в контейнере */
+.form-container {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;  /* Ограничиваем ширину формы */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем содержимое по вертикали */
+    box-sizing: border-box;
+    margin: 0 auto;  /* Центрируем форму по горизонтали */
+    position: absolute; /* Используем absolute для центрирования */
+    top: 50%; /* Сдвигаем форму на 50% от верхнего края */
+    left: 50%; /* Сдвигаем форму на 50% от левого края */
+    transform: translate(-50%, -50%); /* Центрируем по обоим осям */
+}
+
+
+
+/* Кнопка добавления поста */
+.add-post-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.add-post-button:hover {
+    background-color: #005fa3;
+}
+
+/* Модальное окно */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Контейнер модального окна */
+.modal-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Ограничиваем ширину */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Стили для формы добавления поста */
+.post-form input,
+.post-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.post-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.post-form button:hover {
+    background-color: #005fa3;
+}
+
+
+
+
+.post-item:hover {
+    transform: translateY(-5px);
+}
+
+.post-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.post-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    text-decoration: underline;
+}
+
+.post-content {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit the content to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: #888;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-author {
+    font-weight: bold;
+}
+
+.post-date {
+    font-style: italic;
+}
+
+.post-item {
+    min-width: 100%;  /* Фиксированная ширина для всех постов */
+}
+
+
+
+
+
+
+
+/* Общие стили для компонента комментариев */
+.comment-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    width: 70%; /* Контейнер теперь занимает всю ширину */
+    max-width: 100%; /* Убираем максимальную ширину */
+    box-sizing: border-box;
+}
+
+/* Стили для поста */
+.post-detail h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.post-detail p {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Стили для списка комментариев */
+.comments-list {
+    margin-top: 20px;
+    padding-left: 0;
+}
+
+/* Индивидуальные комментарии */
+.comment-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 15px;
+}
+
+.comment-item p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+.comment-item strong {
+    font-size: 1.1rem;
+    color: #007bff;
+}
+
+.comment-item .comment-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Стили для формы добавления комментария */
+.comment-form {
+    margin-top: 20px;
+}
+
+.comment-form textarea {
+    width: 98%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.comment-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.comment-form button:hover {
+    background-color: #005fa3;
+}
+
+.comment-form button:active {
+    background-color: #003f7f;
+}
+
+
+

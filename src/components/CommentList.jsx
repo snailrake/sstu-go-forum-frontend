@@ -37,15 +37,14 @@ function CommentList() {
     };
 
     return (
-        <div>
+        <div className="comment-container">
             {/* Проверяем, есть ли пост, и если он есть — отображаем его */}
             {post ? (
-                <div>
+                <div className="post-detail">
                     <h2>{post.title}</h2>
                     <p style={{ whiteSpace: 'pre-line' }}>{post.content}</p>
                     <p><em><strong>Опубликовано:</strong> {new Date(post.timestamp).toLocaleString()}</em></p>
                 </div>
-
             ) : (
                 <p>Загружается пост...</p>
             )}
@@ -55,19 +54,20 @@ function CommentList() {
             {comments.length === 0 ? (
                 <p>Пока нет комментариев.</p>
             ) : (
-                <ul>
+                <div className="comments-list">
                     {comments.map((comment) => (
-                        <li key={comment.id}>
-                            <strong>{comment.username ? comment.username : 'Аноним'}: </strong>
-                            {comment.content}
-                        </li>
+                        <div key={comment.id} className="comment-item">
+                            <strong>{comment.username ? comment.username : 'Аноним'}:</strong>
+                            <p>{comment.content}</p>
+                            <span className="comment-date">{new Date(comment.timestamp).toLocaleString()}</span>
+                        </div>
                     ))}
-                </ul>
+                </div>
             )}
 
             {/* Форма для добавления комментария */}
             <h3>Добавить комментарий</h3>
-            <form onSubmit={handleCreateComment}>
+            <form onSubmit={handleCreateComment} className="comment-form">
                 <textarea
                     placeholder="Комментарий"
                     value={newContent}
