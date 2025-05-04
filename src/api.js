@@ -103,5 +103,19 @@ export const loginUser = (username, password) =>
 export const refreshToken = refreshTokenValue =>
     authApi.post('/refresh', { refresh_token: refreshTokenValue });
 
+export const getAllTopics = () => api.get('/topics');
+
+export const createTopic = (title, description) => api.post('/topics/create', { title, description });
+
+export const getPostsByTopic = (topicId) => api.get(`/posts?topic_id=${topicId}`);
+export const createPost = (topicId, title, content) => api.post('/posts/create', { topic_id: parseInt(topicId), title, content });
+export const getCommentsByPost = (postId) => api.get(`/comments?post_id=${postId}`);
+
+export const createComment = (postId, content) => api.post('/comments/create', { post_id: parseInt(postId), content });
+
+
+
+
+
 // По-умолчанию всё, что не описано выше, идёт через этот экземпляр
 export default api;
