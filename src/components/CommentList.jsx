@@ -42,9 +42,10 @@ function CommentList() {
             {post ? (
                 <div>
                     <h2>{post.title}</h2>
-                    <p>{post.content}</p>
-                    <p><em>Опубликовано {new Date(post.timestamp).toLocaleString()}</em></p>
+                    <p style={{ whiteSpace: 'pre-line' }}>{post.content}</p>
+                    <p><em><strong>Опубликовано:</strong> {new Date(post.timestamp).toLocaleString()}</em></p>
                 </div>
+
             ) : (
                 <p>Загружается пост...</p>
             )}
