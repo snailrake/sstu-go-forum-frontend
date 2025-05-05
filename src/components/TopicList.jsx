@@ -10,11 +10,7 @@ function TopicList() {
     useEffect(() => {
         async function fetchTopics() {
             const response = await getAllTopics();
-            if (response.data) {
-                setTopics(response.data); // If response.data is not null or undefined, set it
-            } else {
-                setTopics([]); // Set an empty array if response.data is null or undefined
-            }
+            setTopics(response.data || []);
         }
         fetchTopics();
     }, []);
@@ -26,53 +22,71 @@ function TopicList() {
             setNewTitle('');
             setNewDescription('');
             const response = await getAllTopics();
-            if (response.data) {
-                setTopics(response.data);
-            } else {
-                setTopics([]);
-            }
-            setShowModal(false); // Close modal after adding topic
+            setTopics(response.data || []);
+            setShowModal(false);
+        }
+    };
+
+    const handleOverlayClick = (e) => {
+        // Закрываем только если кликнули по overlay, а не по внутреннему .modal-content
+        if (e.target.classList.contains('modal-overlay')) {
+            setShowModal(false);
         }
     };
 
     return (
         <div>
-            <h2>Список тем</h2>
-            <button onClick={() => setShowModal(true)} className="add-topic-button">Добавить тему</button>
+            {/* Заголовок с плюсом */}
+            <div className="topic-header">
+                <h2>Темы</h2>
+                <button
+                    className="add-topic-button"
+                    onClick={() => setShowModal(true)}
+                    aria-label="Добавить тему"
+                >
+                    +
+                </button>
+            </div>
 
-            {/* Modal */}
+            {/* Модалка */}
             {showModal && (
-                <div className="modal-overlay">
-                    <div className="modal-content">
+                <div
+                    className="modal-overlay"
+                    onClick={handleOverlayClick}
+                >
+                    {/* Предотвращаем всплытие клика внутрь контента */}
+                    <div
+                        className="modal-content"
+                        onClick={e => e.stopPropagation()}
+                    >
                         <h3>Добавить новую тему</h3>
                         <form onSubmit={handleCreateTopic}>
                             <input
                                 type="text"
                                 placeholder="Название темы"
                                 value={newTitle}
-                                onChange={(e) => setNewTitle(e.target.value)}
+                                onChange={e => setNewTitle(e.target.value)}
                                 required
                             />
                             <input
                                 type="text"
                                 placeholder="Описание"
                                 value={newDescription}
-                                onChange={(e) => setNewDescription(e.target.value)}
+                                onChange={e => setNewDescription(e.target.value)}
                                 required
                             />
                             <button type="submit">Добавить</button>
                         </form>
-                        <button onClick={() => setShowModal(false)} className="close-modal">Закрыть</button>
                     </div>
                 </div>
             )}
 
-            {/* Render topics */}
+            {/* Список тем */}
             {topics.length === 0 ? (
-                <p>Нет доступных тем.</p> // Display a message when there are no topics
+                <p>Нет доступных тем.</p>
             ) : (
                 <ul className="topics-list">
-                    {topics.map((topic) => (
+                    {topics.map(topic => (
                         <li key={topic.id}>
                             <a href={`/topic/${topic.id}`}>{topic.title}</a>
                         </li>

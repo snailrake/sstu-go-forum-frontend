@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:8080';
+const API_BASE_URL = 'http://localhost:8080';
+const AUTH_BASE_URL = 'http://localhost:8081';
 
-// Отдельный экземпляр без интерсепторов для refresh
-const authApi = axios.create({ baseURL });
+// Отдельный экземпляр для авторизации (register, login, refresh)
+const authApi = axios.create({ baseURL: AUTH_BASE_URL });
 
-// Основной экземпляр для всех запросов
-const api = axios.create({ baseURL });
+// Основной экземпляр для остальных запросов
+const api = axios.create({ baseURL: API_BASE_URL });
 
 // Парсер JWT-токена, возвращает payload или null
 function parseJwt(token) {
@@ -27,23 +28,22 @@ function parseJwt(token) {
 let isRefreshing = false;
 let subscribers = [];
 
-// Подписаться на событие, когда refresh завершится
+// Подписаться на событие, когда токен обновится
 function subscribe(cb) {
     subscribers.push(cb);
 }
 
-// Уведомить всех ожидающих новых токенов
+// Уведомить всех подписчиков о новом токене
 function onRefreshed(token) {
     subscribers.forEach(cb => cb(token));
     subscribers = [];
 }
 
-// Интерсептор перед каждым запросом
+// Интерсептор для основного api — ставит Authorization и обновляет токен при необходимости
 api.interceptors.request.use(async config => {
     let token = localStorage.getItem('access_token');
     if (token) {
         const decoded = parseJwt(token);
-        // Если истёк
         if (decoded && decoded.exp && Date.now() >= decoded.exp * 1000) {
             const refresh = localStorage.getItem('refresh_token');
             if (!isRefreshing) {
@@ -56,7 +56,6 @@ api.interceptors.request.use(async config => {
                     token = newAccess;
                     onRefreshed(newAccess);
                 } catch (err) {
-                    // если refresh упал — чистим всё и кидаем на логин
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('refresh_token');
                     window.location.href = '/login';
@@ -65,7 +64,6 @@ api.interceptors.request.use(async config => {
                     isRefreshing = false;
                 }
             }
-            // ждём, пока токен обновится
             return new Promise(resolve => {
                 subscribe(newToken => {
                     config.headers.Authorization = `Bearer ${newToken}`;
@@ -73,49 +71,56 @@ api.interceptors.request.use(async config => {
                 });
             });
         }
-        // если не истёк — просто пушим
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 }, error => Promise.reject(error));
 
-export const getAllMessages = async (token) => {
-    try {
-        const response = await axios.get(`${baseURL}/chat/messages`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Ошибка при загрузке сообщений:', error);
-        throw error;
-    }
-};
+// Экспорт функций для UI
 
-// Экспортируем функции для UI
+// Авторизация на 8081
 export const registerUser = (username, password) =>
-    api.post('/register', { username, password });
+    authApi.post('/register', { username, password });
 
 export const loginUser = (username, password) =>
-    api.post('/login', { username, password });
+    authApi.post('/login', { username, password });
 
 export const refreshToken = refreshTokenValue =>
     authApi.post('/refresh', { refresh_token: refreshTokenValue });
 
-export const getAllTopics = () => api.get('/topics');
+// Основное API на 8080
+export const getAllTopics = () =>
+    api.get('/topics');
 
-export const createTopic = (title, description) => api.post('/topics/create', { title, description });
+export const createTopic = (title, description) =>
+    api.post('/topics/create', { title, description });
 
-export const getPostsByTopic = (topicId) => api.get(`/posts?topic_id=${topicId}`);
-export const createPost = (topicId, title, content) => api.post('/posts/create', { topic_id: parseInt(topicId), title, content });
-export const getCommentsByPost = (postId) => api.get(`/comments?post_id=${postId}`);
+export const getAllPosts = () =>
+    api.get('/posts/all');
 
-export const createComment = (postId, content) => api.post('/comments/create', { post_id: parseInt(postId), content });
+export const getPostsByTopic = (topicId) =>
+    api.get(`/posts?topic_id=${topicId}`);
 
+export const createPost = (topicId, title, content) =>
+    api.post('/posts/create', { topic_id: parseInt(topicId), title, content });
 
+export const getCommentsByPost = (postId) =>
+    api.get(`/comments?post_id=${postId}`);
 
+export const createComment = (postId, content) =>
+    api.post('/comments/create', { post_id: parseInt(postId), content });
 
+export const getAllMessages = async (token) => {
+    try {
+        const res = await axios.get(`${API_BASE_URL}/chat/messages`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return res.data;
+    } catch (err) {
+        console.error('Ошибка при загрузке сообщений:', err);
+        throw err;
+    }
+};
 
 // По-умолчанию всё, что не описано выше, идёт через этот экземпляр
 export default api;

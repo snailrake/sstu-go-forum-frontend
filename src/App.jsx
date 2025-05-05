@@ -13,8 +13,7 @@ function App() {
         refresh_token: localStorage.getItem('refresh_token') || '',
     });
     const [isPanelOpen, setIsPanelOpen] = useState(false);
-    const location = useLocation(); // To get the current path
-
+    const location = useLocation();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -24,32 +23,27 @@ function App() {
         navigate('/login');
     };
 
-    const handleLogin = () => {
-        navigate('/login');
-    };
+    const handleLogin = () => navigate('/login');
 
     return (
         <div className={`app-container ${isPanelOpen ? 'panel-open' : ''}`}>
             <nav className="nav">
-                <ul>
-                    <li><Link to="/">Главная</Link></li>
-                </ul>
-                {!tokens.access_token ? (
-                    <button onClick={handleLogin} className={`login-button ${isPanelOpen ? 'shifted' : ''}`}>Войти</button>
-                ) : (
-                    <button onClick={handleLogout} className={`logout-button ${isPanelOpen ? 'shifted' : ''}`}>Выйти</button>
-                )}
+                <ul><li><Link to="/">Главная</Link></li></ul>
+                {!tokens.access_token
+                    ? <button onClick={handleLogin} className={`login-button ${isPanelOpen ? 'shifted' : ''}`}>Войти</button>
+                    : <button onClick={handleLogout} className={`logout-button ${isPanelOpen ? 'shifted' : ''}`}>Выйти</button>
+                }
             </nav>
             <div className="main-container">
-                {/* Conditionally render TopicList only when not on the login page */}
                 {location.pathname !== '/login' && location.pathname !== '/register' && (
                     <aside className="sidebar">
                         <TopicList />
                     </aside>
                 )}
                 <main className="content">
-                    <Chat setIsPanelOpen={setIsPanelOpen} />
+                    <Chat setIsPanelOpen={setIsPanelOpen}/>
                     <Routes>
+                        <Route path="/" element={<PostList />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login setTokens={setTokens} />} />
                         <Route path="/topic/:topicId" element={<PostList />} />

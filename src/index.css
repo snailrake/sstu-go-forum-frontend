@@ -993,5 +993,66 @@ input {
     background-color: #003f7f;
 }
 
+/* Обёртка для заголовка */
+.topic-header {
+    display: inline-flex;        /* inline-flex, чтобы ширина по содержимому */
+    align-items: baseline;       /* выравниваем по базовой линии текста */
+    /* justify-content: flex-start; по умолчанию */
+}
+
+/* Заголовок */
+.topic-header h2 {
+    margin: 0;                   /* убираем внешние отступы */
+    font-size: 1.25rem;          /* или ваш размер */
+    line-height: 1;              /* чтобы кнопка точно выровнялась */
+}
+
+/* Кнопка-плюс */
+.add-topic-button {
+    background: none;
+    border: none;
+    font-size: 1.25rem;          /* совпадает с размером h2 */
+    line-height: 1;
+    padding: 0;
+    margin-left: 0.25rem;        /* небольшой отступ от заголовка */
+    cursor: pointer;
+    color: #007bff;
+    vertical-align: baseline;    /* для inline-варианта */
+}
+
+/* Сбросим фон и рамку у плюс-кнопки */
+.add-topic-button {
+    background: none;
+    border: none;
+}
+
+/* При наведении — только меняем цвет текста, без заливки */
+.add-topic-button:hover {
+    background: none !important;
+    color: red;
+}
+
+/* Уберем фон от общего правила button:hover */
+button.add-topic-button:hover {
+    background-color: transparent;
+}
 
 
+/* Убираем или минимизируем отступ под заголовком */
+.topic-header {
+    display: inline-flex;
+    align-items: baseline;
+    margin-bottom: 0;    /* было 20px — почти убрали */
+}
+
+/* Убираем отступ у самого заголовка */
+.topic-header h2 {
+    margin: 0;             /* обнуляем отступы */
+    line-height: 1;
+}
+
+/* Убираем отступ сверху у списка тем */
+.topics-list {
+    margin: 0;             /* обнуляем и margin-top, и margin-bottom */
+    padding-left: 0;       /* если нужно */
+}
