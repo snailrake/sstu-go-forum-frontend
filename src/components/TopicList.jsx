@@ -1,11 +1,17 @@
+// src/components/TopicList.jsx
 import React, { useState, useEffect } from 'react';
-import { getAllTopics, createTopic } from '../api';
+import { getAllTopics, createTopic, deleteTopic } from '../api';
+import { parseJwt } from '../api';
 
 function TopicList() {
     const [topics, setTopics] = useState([]);
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
     const [showModal, setShowModal] = useState(false);
+
+    const token = localStorage.getItem('access_token');
+    const decoded = token ? parseJwt(token) : null;
+    const isAdmin = decoded?.role === 'ADMIN';
 
     useEffect(() => {
         async function fetchTopics() {
@@ -27,8 +33,15 @@ function TopicList() {
         }
     };
 
+    const handleDelete = async (id) => {
+        if (window.confirm('Удалить тему?')) {
+            await deleteTopic(id);
+            const response = await getAllTopics();
+            setTopics(response.data || []);
+        }
+    };
+
     const handleOverlayClick = (e) => {
-        // Закрываем только если кликнули по overlay, а не по внутреннему .modal-content
         if (e.target.classList.contains('modal-overlay')) {
             setShowModal(false);
         }
@@ -36,29 +49,22 @@ function TopicList() {
 
     return (
         <div>
-            {/* Заголовок с плюсом */}
             <div className="topic-header">
                 <h2>Темы</h2>
-                <button
-                    className="add-topic-button"
-                    onClick={() => setShowModal(true)}
-                    aria-label="Добавить тему"
-                >
-                    +
-                </button>
+                {isAdmin && (
+                    <button
+                        className="add-topic-button"
+                        onClick={() => setShowModal(true)}
+                        aria-label="Добавить тему"
+                    >
+                        +
+                    </button>
+                )}
             </div>
 
-            {/* Модалка */}
             {showModal && (
-                <div
-                    className="modal-overlay"
-                    onClick={handleOverlayClick}
-                >
-                    {/* Предотвращаем всплытие клика внутрь контента */}
-                    <div
-                        className="modal-content"
-                        onClick={e => e.stopPropagation()}
-                    >
+                <div className="modal-overlay" onClick={handleOverlayClick}>
+                    <div className="modal-content" onClick={e => e.stopPropagation()}>
                         <h3>Добавить новую тему</h3>
                         <form onSubmit={handleCreateTopic}>
                             <input
@@ -81,7 +87,6 @@ function TopicList() {
                 </div>
             )}
 
-            {/* Список тем */}
             {topics.length === 0 ? (
                 <p>Нет доступных тем.</p>
             ) : (
@@ -89,6 +94,14 @@ function TopicList() {
                     {topics.map(topic => (
                         <li key={topic.id}>
                             <a href={`/topic/${topic.id}`}>{topic.title}</a>
+                            {isAdmin && (
+                                <button
+                                    className="delete-topic-button"
+                                    onClick={() => handleDelete(topic.id)}
+                                >
+                                    −
+                                </button>
+                            )}
                         </li>
                     ))}
                 </ul>

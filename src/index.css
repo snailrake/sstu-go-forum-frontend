@@ -1056,3 +1056,138 @@ button.add-topic-button:hover {
     margin: 0;             /* обнуляем и margin-top, и margin-bottom */
     padding-left: 0;       /* если нужно */
 }
+.delete-topic-button {
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0;
+    font-size: 1rem;
+    border-radius: 50%;
+    background: #dc3545;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+}
+.delete-topic-button:hover {
+    background: #a71d2a;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.topic-header {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.topic-header h2 {
+    margin: 0;
+}
+
+.add-topic-button {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+
+.add-topic-button {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    padding: 0;
+    cursor: pointer;
+    vertical-align: baseline;
+}
+.add-topic-button {
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 100%;
+    background: #007acc;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    line-height: 1;
+    border: none;
+    cursor: pointer;
+    margin-top: 1.3rem;
+}
+.add-topic-button {
+    background-color: #007acc;
+    transition: filter 0.2s, box-shadow 0.2s;
+}
+
+.add-topic-button:hover {
+    /* чуть светлее фон */
+    filter: brightness(1.1);
+    /* и нежная подсветка */
+    box-shadow: 0 0 6px rgba(0, 122, 204, 0.6);
+    transform: scale(1.1);
+}
+
+.post-title {
+    display: flex;
+    align-items: center;
+}
+
+.delete-post-button {
+    width: 1.5rem;
+    aspect-ratio: 1 / 1;   /* или height: 1.5rem; если не поддерживается */
+    padding: 0;            /* убираем внутренние отступы */
+    border-radius: 50%;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.75rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.delete-post-button:hover {
+    background: #a71d2a;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* src/components/CommentList.css */
+.comment-item {
+    position: relative;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+
+.delete-comment-button {
+    position: absolute;
+    aspect-ratio: 1 / 1;   /* или height: 1.5rem; если не поддерживается */
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0;
+    width: 1.5rem;           /* новая ширина */
+    border-radius: 100%;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.1s;
+}
+
+.delete-comment-button:hover {
+    filter: brightness(0.9);
+    transform: scale(1.1);
+    background: #a71d2a;
+}

@@ -10,7 +10,7 @@ const authApi = axios.create({ baseURL: AUTH_BASE_URL });
 const api = axios.create({ baseURL: API_BASE_URL });
 
 // Парсер JWT-токена, возвращает payload или null
-function parseJwt(token) {
+export function parseJwt(token) {
     try {
         const base64 = token.split('.')[1];
         const jsonPayload = decodeURIComponent(
@@ -78,9 +78,11 @@ api.interceptors.request.use(async config => {
 
 // Экспорт функций для UI
 
-// Авторизация на 8081
 export const registerUser = (username, password) =>
-    authApi.post('/register', { username, password });
+    authApi.post('/register', { username, password, role: 'USER' });
+
+export const registerAdmin = (username, password) =>
+    authApi.post('/register', { username, password, role: 'ADMIN' });
 
 export const loginUser = (username, password) =>
     authApi.post('/login', { username, password });
@@ -122,5 +124,14 @@ export const getAllMessages = async (token) => {
     }
 };
 
-// По-умолчанию всё, что не описано выше, идёт через этот экземпляр
+export const deleteTopic = (id) =>
+    api.delete('/topics/delete', { params: { id } });
+
+export const deletePost = id =>
+    api.delete('/posts/delete', { params: { post_id: id } })
+
+export const deleteComment = id =>
+    api.delete('/comments/delete', { params: { comment_id: id } })
+
+
 export default api;

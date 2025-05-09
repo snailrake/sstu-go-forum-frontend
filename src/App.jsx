@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import Register from './components/Register';
+import AdminRegister from './components/AdminRegister';
 import Login from './components/Login';
 import Chat from './components/Chat';
 import TopicList from './components/TopicList';
@@ -22,8 +23,31 @@ function App() {
         setTokens({ access_token: '', refresh_token: '' });
         navigate('/login');
     };
-
     const handleLogin = () => navigate('/login');
+
+    // Отдельная страница для регистрации админа
+// В App.js, в блоке для /register-admin замените <nav> на такой:
+    if (location.pathname === '/register-admin') {
+        return (
+            <div className="app-container">
+                <nav className="nav">
+                    <ul>
+                        <li><Link to="/">Главная</Link></li>
+                    </ul>
+                    <button
+                        onClick={handleLogin}
+                        className={`login-button ${isPanelOpen ? 'shifted' : ''}`}
+                    >
+                        Войти
+                    </button>
+                </nav>
+                <main className="content auth-content">
+                    <AdminRegister />
+                </main>
+            </div>
+        );
+    }
+
 
     return (
         <div className={`app-container ${isPanelOpen ? 'panel-open' : ''}`}>
@@ -45,6 +69,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<PostList />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/register-admin" element={<AdminRegister />} />
                         <Route path="/login" element={<Login setTokens={setTokens} />} />
                         <Route path="/topic/:topicId" element={<PostList />} />
                         <Route path="/topic/:topicId/post/:postId" element={<CommentList />} />
