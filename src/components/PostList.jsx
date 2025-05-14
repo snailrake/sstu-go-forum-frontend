@@ -1,4 +1,3 @@
-// src/components/PostList.jsx
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getAllPosts, getPostsByTopic, createPost, getAllTopics, deletePost, parseJwt } from '../api'

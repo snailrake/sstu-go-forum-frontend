@@ -25,8 +25,6 @@ function App() {
     };
     const handleLogin = () => navigate('/login');
 
-    // Отдельная страница для регистрации админа
-// В App.js, в блоке для /register-admin замените <nav> на такой:
     if (location.pathname === '/register-admin') {
         return (
             <div className="app-container">

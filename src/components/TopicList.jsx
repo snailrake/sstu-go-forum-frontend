@@ -1,4 +1,3 @@
-// src/components/TopicList.jsx
 import React, { useState, useEffect } from 'react';
 import { getAllTopics, createTopic, deleteTopic } from '../api';
 import { parseJwt } from '../api';

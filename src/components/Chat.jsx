@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getAllMessages } from '../api'; // Функция для получения всех сообщений с сервера
-import SlidePanel from './SlidePanel'; // Импортируем ваш компонент панели
+import { getAllMessages } from '../api';
+import SlidePanel from './SlidePanel';
 
 function Chat({ setIsPanelOpen }) {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
     const [socket, setSocket] = useState(null);
-    const [username, setUsername] = useState('');  // Состояние для имени пользователя
-    const [isAuthenticated, setIsAuthenticated] = useState(false);  // Состояние для авторизации
-    const [isPanelOpenLocal, setIsPanelOpenLocal] = useState(false);  // Состояние для панели чата (локальное)
+    const [username, setUsername] = useState('');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isPanelOpenLocal, setIsPanelOpenLocal] = useState(false);
 
-    const messagesEndRef = useRef(null);  // Реф для контейнера сообщений
-    const panelRef = useRef(null);  // Реф для панели чата
+    const messagesEndRef = useRef(null);
+    const panelRef = useRef(null);
 
     // Обработчик клика вне панели чата
     useEffect(() => {
@@ -96,7 +96,7 @@ function Chat({ setIsPanelOpen }) {
 
             <SlidePanel isOpen={isPanelOpenLocal} onClose={() => { setIsPanelOpen(false); setIsPanelOpenLocal(false); }}>
                 <div style={styles.chatContainer}>
-                    <div style={{ ...styles.messages, flexGrow: isAuthenticated ? 1 : 2 }}> {/* Условный стиль для сообщений */}
+                    <div style={{ ...styles.messages, flexGrow: isAuthenticated ? 1 : 2 }}> {}
                         {messages.map((msg, index) => (
                             <div key={index}>
                                 <strong>{msg.username}: </strong>{msg.content}
@@ -150,7 +150,7 @@ const styles = {
     },
     messages: {
         flex: 1,
-        maxHeight: 'calc(100vh - 100px)',  // Уменьшаем отступ
+        maxHeight: 'calc(100vh - 100px)',
         overflowY: 'auto',
         padding: '10px',
         marginBottom: '10px',
@@ -171,7 +171,7 @@ const styles = {
         flex: 1,
         padding: '10px',
         marginRight: '10px',
-        maxWidth: 'calc(100% - 120px)', // Убираем лишний горизонтальный скролл
+        maxWidth: 'calc(100% - 120px)',
         boxSizing: 'border-box',
     },
     sendButton: {

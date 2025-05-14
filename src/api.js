@@ -3,13 +3,10 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:8080';
 const AUTH_BASE_URL = 'http://localhost:8081';
 
-// Отдельный экземпляр для авторизации (register, login, refresh)
 const authApi = axios.create({ baseURL: AUTH_BASE_URL });
 
-// Основной экземпляр для остальных запросов
 const api = axios.create({ baseURL: API_BASE_URL });
 
-// Парсер JWT-токена, возвращает payload или null
 export function parseJwt(token) {
     try {
         const base64 = token.split('.')[1];
@@ -28,18 +25,15 @@ export function parseJwt(token) {
 let isRefreshing = false;
 let subscribers = [];
 
-// Подписаться на событие, когда токен обновится
 function subscribe(cb) {
     subscribers.push(cb);
 }
 
-// Уведомить всех подписчиков о новом токене
 function onRefreshed(token) {
     subscribers.forEach(cb => cb(token));
     subscribers = [];
 }
 
-// Интерсептор для основного api — ставит Authorization и обновляет токен при необходимости
 api.interceptors.request.use(async config => {
     let token = localStorage.getItem('access_token');
     if (token) {
@@ -76,8 +70,6 @@ api.interceptors.request.use(async config => {
     return config;
 }, error => Promise.reject(error));
 
-// Экспорт функций для UI
-
 export const registerUser = (username, password) =>
     authApi.post('/register', { username, password, role: 'USER' });
 
@@ -90,7 +82,6 @@ export const loginUser = (username, password) =>
 export const refreshToken = refreshTokenValue =>
     authApi.post('/refresh', { refresh_token: refreshTokenValue });
 
-// Основное API на 8080
 export const getAllTopics = () =>
     api.get('/topics');
 

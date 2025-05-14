@@ -1,10 +1,8 @@
 
-/* Styling for the post list container */
 .post-list {
     margin-top: 20px;
 }
 
-/* Individual post item styling */
 .post-item {
     background-color: #fff;
     padding: 20px;
@@ -15,12 +13,10 @@
     transition: transform 0.3s ease;
 }
 
-/* Hover effect for post item */
 .post-item:hover {
     transform: translateY(-5px);
 }
 
-/* Post title styling */
 .post-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -38,19 +34,17 @@
     text-decoration: underline;
 }
 
-/* Post content styling with truncation */
 .post-content {
     font-size: 1rem;
     color: #333;
     margin-bottom: 15px;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limit the content to 3 lines */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Post metadata (author, date) styling */
 .post-meta {
     font-size: 0.9rem;
     color: #888;
@@ -66,7 +60,6 @@
     font-style: italic;
 }
 
-/* Form styling for creating new posts */
 .post-form {
     margin-top: 20px;
     background-color: #f9f9f9;
@@ -75,7 +68,6 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Form input and textarea styling */
 .post-form input,
 .post-form textarea {
     width: 100%;
@@ -125,13 +117,11 @@
     justify-content: space-between;
 }
 
-/* Modal Title */
 .modal-container h2 {
     text-align: center;
     margin-bottom: 15px;
 }
 
-/* Form Input Fields */
 .modal-container input,
 .modal-container textarea {
     width: 100%;
@@ -140,10 +130,9 @@
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; /* Ensure that padding is included in the width */
+    box-sizing: border-box;
 }
 
-/* Buttons */
 .modal-container button {
     padding: 10px;
     background-color: #007bff;
@@ -151,7 +140,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 100%;  /* Ensure buttons take the full width */
+    width: 100%;
 }
 
 .modal-container button:hover {
@@ -162,17 +151,15 @@
     background-color: #003f7f;
 }
 
-/* Modal Close Button */
 .modal-close {
     margin-top: 10px;
     background-color: #ff4d4d;
 }
 
 .modal-container button:focus {
-    outline: none;  /* Remove the focus outline from the buttons */
+    outline: none;
 }
 
-/* Overlay */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -184,17 +171,15 @@
 }
 
 
-/* Enable scrolling for sidebar when content overflows */
 .sidebar {
     width: 250px;
     background-color: #f4f4f4;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Allow scrolling */
-    max-height: 100vh; /* Prevents sidebar from growing too tall */
+    overflow-y: auto;
+    max-height: 100vh;
 }
 
-/* Button to add a new topic */
 .add-topic-button {
     padding: 10px;
     background-color: #007bff;
@@ -210,7 +195,6 @@
     background-color: #0056b3;
 }
 
-/* Modal overlay */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -224,7 +208,6 @@
     z-index: 1000;
 }
 
-/* Modal content styling */
 .modal-content {
     background: white;
     padding: 20px;
@@ -260,7 +243,6 @@
     background-color: #0056b3;
 }
 
-/* Close modal button */
 .close-modal {
     background-color: #ff4d4d;
     color: white;
@@ -276,7 +258,6 @@
     background-color: #e60000;
 }
 
-/* Styling for the list of topics */
 .topics-list {
     list-style-type: none;
     padding: 0;
